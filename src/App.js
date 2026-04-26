@@ -6,7 +6,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Producers from './pages/Producers'
 import BuyerRegister from './pages/BuyerRegister'
-import HomepageProdutor from './pages/HomeProdutor'
+import HomeProdutor from './pages/HomeProdutor'
 
 function App() {
   return (
