@@ -6,6 +6,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Producers from './pages/Producers'
 import BuyerRegister from './pages/BuyerRegister'
+import HomepageProdutor from './pages/HomeProdutor'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/contato" element={<Contact />} />
             <Route path="/produtores" element={<Producers />} />
             <Route path="/cadastro-comprador" element={<BuyerRegister />} />
+            <Route path="/home-produtor" element={<HomeProdutor />} />
           </Routes>
         </main>
         <Footer />
