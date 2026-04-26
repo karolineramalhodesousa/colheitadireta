@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Producers = () => {
   const navigate = useNavigate()
 
-const Producers = () => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     farmName: '',
     ownerName: '',
     email: '',
@@ -112,7 +111,8 @@ const Producers = () => {
           <h2 style={{ fontSize: '2rem', textAlign: 'center', marginBottom: '3rem', color: '#333' }}>
             Formulário de Cadastro
           </h2>
-          
+
+      return(        
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             <form onSubmit={handleSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
@@ -287,7 +287,7 @@ const Producers = () => {
                     type="button"
                     className="btn btn-primary"
                     style={{ fontSize: '1.2rem', padding: '1rem 3rem', width: '100%' }}
-                    onClick={() => navigate("/homepage-produtor")}
+                    onClick={() => navigate("/home-produtor")}
                   >
                     🌱 Cadastrar Minha Propriedade
                   </button>
@@ -299,6 +299,7 @@ const Producers = () => {
       </section>
     </div>
   )
+)
 }
 }
 
