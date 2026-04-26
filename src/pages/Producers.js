@@ -22,22 +22,6 @@ const Producers = () => {
       [e.target.name]: e.target.value
     })
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert('Cadastro realizado com sucesso! Entraremos em contato para finalizar seu registro.')
-    setFormData({
-      farmName: '',
-      ownerName: '',
-      email: '',
-      phone: '',
-      location: '',
-      products: '',
-      experience: '',
-      description: ''
-    })
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     sessionStorage.setItem('produtorData', JSON.stringify(formData))
