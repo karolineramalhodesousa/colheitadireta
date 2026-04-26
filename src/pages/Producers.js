@@ -284,7 +284,7 @@ const [formData, setFormData] = useState({
                 const navigate = useNavigate();
                 return (
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-primary"
                     style={{ fontSize: '1.2rem', padding: '1rem 3rem', width: '100%' }}
                     onClick={() => navigate("/home-produtor")}
