@@ -113,20 +113,100 @@ const Producers = () => {
             Formulário de Cadastro
           </h2>
 
-          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <form onSubmit={handleSubmit}>
-
-              <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <form onSubmit={handleSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                <div>
+         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+              <form onSubmit={handleSubmit}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
+                      Nome da Propriedade *
+                    </label>
+                    <input
+                      type="text"
+                      name="farmName"
+                      value={formData.farmName}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '0.8rem',
+                        border: '2px solid #e0e0e0',
+                        borderRadius: '5px',
+                        fontSize: '1rem'
+                      }}
+                    />
+                  </div>
+  
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
+                      Nome do Responsável *
+                    </label>
+                    <input
+                      type="text"
+                      name="ownerName"
+                      value={formData.ownerName}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '0.8rem',
+                        border: '2px solid #e0e0e0',
+                        borderRadius: '5px',
+                        fontSize: '1rem'
+                      }}
+                    />
+                  </div>
+                </div>
+  
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
+                      E-mail *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '0.8rem',
+                        border: '2px solid #e0e0e0',
+                        borderRadius: '5px',
+                        fontSize: '1rem'
+                      }}
+                    />
+                  </div>
+  
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
+                      Telefone *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '0.8rem',
+                        border: '2px solid #e0e0e0',
+                        borderRadius: '5px',
+                        fontSize: '1rem'
+                      }}
+                    />
+                  </div>
+                </div>
+  
+                <div style={{ marginBottom: '1.5rem' }}>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                    Nome da Propriedade *
+                    Localização (Cidade/Estado) *
                   </label>
                   <input
                     type="text"
-                    name="farmName"
-                    value={formData.farmName}
+                    name="location"
+                    value={formData.location}
                     onChange={handleChange}
                     required
                     style={{
@@ -138,16 +218,17 @@ const Producers = () => {
                     }}
                   />
                 </div>
-
-                <div>
+  
+                <div style={{ marginBottom: '1.5rem' }}>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                    Nome do Responsável *
+                    Principais Produtos *
                   </label>
                   <input
                     type="text"
-                    name="ownerName"
-                    value={formData.ownerName}
+                    name="products"
+                    value={formData.products}
                     onChange={handleChange}
+                    placeholder="Ex: Hortaliças, Frutas, Grãos, etc."
                     required
                     style={{
                       width: '100%',
@@ -158,19 +239,17 @@ const Producers = () => {
                     }}
                   />
                 </div>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                <div>
+  
+                <div style={{ marginBottom: '1.5rem' }}>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                    E-mail *
+                    Tempo de Experiência na Agricultura
                   </label>
                   <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
+                    type="text"
+                    name="experience"
+                    value={formData.experience}
                     onChange={handleChange}
-                    required
+                    placeholder="Ex: 5 anos, mais de 10 anos, etc."
                     style={{
                       width: '100%',
                       padding: '0.8rem',
@@ -180,109 +259,27 @@ const Producers = () => {
                     }}
                   />
                 </div>
-
-                <div>
+  
+                <div style={{ marginBottom: '1.5rem' }}>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                    Telefone *
+                    Descrição da Propriedade
                   </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
+                  <textarea
+                    name="description"
+                    value={formData.description}
                     onChange={handleChange}
-                    required
+                    rows="4"
+                    placeholder="Fale um pouco sobre sua propriedade, métodos de cultivo, certificações, etc."
                     style={{
                       width: '100%',
                       padding: '0.8rem',
                       border: '2px solid #e0e0e0',
                       borderRadius: '5px',
-                      fontSize: '1rem'
+                      fontSize: '1rem',
+                      resize: 'vertical'
                     }}
-                  />
+                  ></textarea>
                 </div>
-              </div>
-
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Localização (Cidade/Estado) *
-                </label>
-                <input
-                  type="text"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  required
-                  style={{
-                    width: '100%',
-                    padding: '0.8rem',
-                    border: '2px solid #e0e0e0',
-                    borderRadius: '5px',
-                    fontSize: '1rem'
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Principais Produtos *
-                </label>
-                <input
-                  type="text"
-                  name="products"
-                  value={formData.products}
-                  onChange={handleChange}
-                  placeholder="Ex: Hortaliças, Frutas, Grãos, etc."
-                  required
-                  style={{
-                    width: '100%',
-                    padding: '0.8rem',
-                    border: '2px solid #e0e0e0',
-                    borderRadius: '5px',
-                    fontSize: '1rem'
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Tempo de Experiência na Agricultura
-                </label>
-                <input
-                  type="text"
-                  name="experience"
-                  value={formData.experience}
-                  onChange={handleChange}
-                  placeholder="Ex: 5 anos, mais de 10 anos, etc."
-                  style={{
-                    width: '100%',
-                    padding: '0.8rem',
-                    border: '2px solid #e0e0e0',
-                    borderRadius: '5px',
-                    fontSize: '1rem'
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                  Descrição da Propriedade
-                </label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  rows="4"
-                  placeholder="Fale um pouco sobre sua propriedade, métodos de cultivo, certificações, etc."
-                  style={{
-                    width: '100%',
-                    padding: '0.8rem',
-                    border: '2px solid #e0e0e0',
-                    borderRadius: '5px',
-                    fontSize: '1rem',
-                    resize: 'vertical'
-                  }}
-                ></textarea>
-              </div>
 
               <button
                 type="submit"
