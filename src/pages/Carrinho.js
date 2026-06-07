@@ -7,11 +7,25 @@ const Carrinho = () => {
   const [comprador, setComprador] = useState(null)
 
   useEffect(() => {
-    const carrinhoSalvo = sessionStorage.getItem('carrinho')
-    const compradorSalvo = sessionStorage.getItem('compradorData')
-    if (carrinhoSalvo) setCarrinho(JSON.parse(carrinhoSalvo))
-    if (compradorSalvo) setComprador(JSON.parse(compradorSalvo))
-  }, [])
+  const carrinhoSalvo = sessionStorage.getItem('carrinho')
+  const compradorSalvo = sessionStorage.getItem('compradorData')
+
+  if (carrinhoSalvo) {
+    try {
+      setCarrinho(JSON.parse(carrinhoSalvo))
+    } catch {
+      sessionStorage.removeItem('carrinho')
+    }
+  }
+
+  if (compradorSalvo) {
+    try {
+      setComprador(JSON.parse(compradorSalvo))
+    } catch {
+      sessionStorage.removeItem('compradorData')
+    }
+  }
+}, [])
 
   const alterarQuantidade = (id, delta) => {
     const novoCarrinho = carrinho
