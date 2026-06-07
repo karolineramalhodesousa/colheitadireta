@@ -1,1 +1,156 @@
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+const produtos = [
+  { id: 1, nome: 'Alface Crespa', fazenda: 'Fazenda Boa Terra', preco: 3.50, emoji: '🥬', unidade: 'maço' },
+  { id: 2, nome: 'Tomate Cereja', fazenda: 'Sítio Verde Vida', preco: 8.90, emoji: '🍅', unidade: 'kg' },
+  { id: 3, nome: 'Cenoura', fazenda: 'Fazenda Raízes', preco: 5.00, emoji: '🥕', unidade: 'kg' },
+  { id: 4, nome: 'Batata Inglesa', fazenda: 'Fazenda Serra Alta', preco: 6.50, emoji: '🥔', unidade: 'kg' },
+  { id: 5, nome: 'Milho Verde', fazenda: 'Sítio Boa Esperança', preco: 4.00, emoji: '🌽', unidade: 'unidade' },
+  { id: 6, nome: 'Soja', fazenda: 'Fazenda Cerrado', preco: 9.00, emoji: '🌱', unidade: 'kg' },
+  { id: 7, nome: 'Chuchu', fazenda: 'Fazenda Boa Terra', preco: 3.00, emoji: '🫛', unidade: 'kg' },
+  { id: 8, nome: 'Abóbora', fazenda: 'Sítio Verde Vida', preco: 7.00, emoji: '🎃', unidade: 'kg' },
+  { id: 9, nome: 'Couve', fazenda: 'Fazenda Raízes', preco: 4.50, emoji: '🥦', unidade: 'maço' },
+  { id: 10, nome: 'Mandioca', fazenda: 'Fazenda Serra Alta', preco: 5.50, emoji: '🌾', unidade: 'kg' },
+  { id: 11, nome: 'Quiabo', fazenda: 'Sítio Boa Esperança', preco: 6.00, emoji: '🫑', unidade: 'kg' },
+  { id: 12, nome: 'Feijão', fazenda: 'Fazenda Cerrado', preco: 10.00, emoji: '🫘', unidade: 'kg' },
+]
+
+const ProdutosComprador = () => {
+  const navigate = useNavigate()
+  const [comprador, setComprador] = useState(null)
+  const [carrinho, setCarrinho] = useState([])
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem('compradorData')
+    if (saved) {
+      setComprador(JSON.parse(saved))
+    } else {
+      navigate('/cadastro-comprador')
+    }
+    const carrinhoSalvo = sessionStorage.getItem('carrinho')
+    if (carrinhoSalvo) setCarrinho(JSON.parse(carrinhoSalvo))
+  }, [navigate])
+
+  const adicionarAoCarrinho = (produto) => {
+    const existe = carrinho.find(p => p.id === produto.id)
+    let novoCarrinho
+    if (existe) {
+      novoCarrinho = carrinho.map(p =>
+        p.id === produto.id ? { ...p, quantidade: p.quantidade + 1 } : p
+      )
+    } else {
+      novoCarrinho = [...carrinho, { ...produto, quantidade: 1 }]
+    }
+    setCarrinho(novoCarrinho)
+    sessionStorage.setItem('carrinho', JSON.stringify(novoCarrinho))
+  }
+
+  const quantidadeNoCarrinho = (id) => {
+    const item = carrinho.find(p => p.id === id)
+    return item ? item.quantidade : 0
+  }
+
+  const totalItens = carrinho.reduce((acc, p) => acc + p.quantidade, 0)
+
+  if (!comprador) return null
+
+  const primeiroNome = comprador.name.split(' ')[0]
+
+  return (
+    <div style={{ backgroundColor: '#f4f1eb', minHeight: '100vh', padding: '2rem 1rem', fontFamily: 'inherit' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+
+        {/* Cabeçalho */}
+        <div style={{
+          backgroundColor: '#2d5016', borderRadius: '12px',
+          padding: '1.25rem 1.75rem', display: 'flex',
+          alignItems: 'center', justifyContent: 'space-between',
+          flexWrap: 'wrap', gap: '12px', marginBottom: '1.75rem'
+        }}>
+          <div>
+            <p style={{ margin: '0 0 2px', fontSize: '18px', fontWeight: '600', color: '#e8f5d0' }}>
+              Olá, {primeiroNome}! 🌿
+            </p>
+            <p style={{ margin: 0, fontSize: '13px', color: '#a3c46a' }}>
+              Escolha os produtos frescos direto do campo
+            </p>
+          </div>
+          <button
+            onClick={() => navigate('/carrinho')}
+            style={{
+              backgroundColor: '#a3c46a', color: '#2d5016',
+              border: 'none', borderRadius: '8px',
+              padding: '8px 18px', fontSize: '14px', fontWeight: '600',
+              cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px'
+            }}
+          >
+            🛒 Carrinho
+            {totalItens > 0 && (
+              <span style={{
+                backgroundColor: '#2d5016', color: '#a3c46a',
+                borderRadius: '20px', padding: '1px 8px', fontSize: '12px'
+              }}>
+                {totalItens}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Grid de produtos */}
+        <p style={{ fontSize: '14px', fontWeight: '600', color: '#555', marginBottom: '0.75rem' }}>
+          Produtos disponíveis
+        </p>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+          gap: '12px',
+          marginBottom: '2rem'
+        }}>
+          {produtos.map(produto => {
+            const qtd = quantidadeNoCarrinho(produto.id)
+            return (
+              <div key={produto.id} style={{
+                backgroundColor: '#fff',
+                border: qtd > 0 ? '1.5px solid #a3c46a' : '1px solid rgba(0,0,0,0.08)',
+                borderRadius: '12px',
+                padding: '1rem',
+                display: 'flex', flexDirection: 'column', gap: '6px'
+              }}>
+                <div style={{ fontSize: '2rem', textAlign: 'center', marginBottom: '4px' }}>
+                  {produto.emoji}
+                </div>
+                <p style={{ margin: 0, fontSize: '15px', fontWeight: '600', color: '#1a1a1a' }}>
+                  {produto.nome}
+                </p>
+                <p style={{ margin: 0, fontSize: '12px', color: '#888' }}>
+                  {produto.fazenda}
+                </p>
+                <p style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: '#3B6D11' }}>
+                  R$ {produto.preco.toFixed(2)} / {produto.unidade}
+                </p>
+                <button
+                  onClick={() => adicionarAoCarrinho(produto)}
+                  style={{
+                    marginTop: '6px',
+                    padding: '7px',
+                    backgroundColor: qtd > 0 ? '#eaf3de' : '#2d5016',
+                    color: qtd > 0 ? '#27500A' : '#e8f5d0',
+                    border: 'none', borderRadius: '8px',
+                    fontSize: '13px', fontWeight: '500', cursor: 'pointer'
+                  }}
+                >
+                  {qtd > 0 ? `+ Adicionar (${qtd} no carrinho)` : '+ Adicionar ao carrinho'}
+                </button>
+              </div>
+            )
+          })}
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+export default ProdutosComprador
 
