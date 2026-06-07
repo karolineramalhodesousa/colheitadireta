@@ -1,31 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const BuyerRegister = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    preferences: ''
-  })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Aqui você pode adicionar a lógica de envio dos dados
-    console.log('Dados do comprador:', formData)
-    alert('Cadastro realizado com sucesso! Em breve entraremos em contato.')
-    setFormData({
+  const BuyerRegister = () => {
+    const navigate = useNavigate()
+    const [formData, setFormData] = useState({
       name: '',
       email: '',
       phone: '',
@@ -35,8 +13,26 @@ const BuyerRegister = () => {
       zipCode: '',
       preferences: ''
     })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
+    const handleSubmit = (e) => {
+    e.preventDefault()
+  
+    sessionStorage.setItem(
+      'compradorData',
+      JSON.stringify(formData)
+    )
+  
+    navigate('/produtos-comprador')
+  }
+    
   return (
     <div className="page-container">
       <div className="container">
