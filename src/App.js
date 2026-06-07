@@ -7,6 +7,8 @@ import Contact from './pages/Contact'
 import Producers from './pages/Producers'
 import BuyerRegister from './pages/BuyerRegister'
 import HomeProdutor from './pages/HomeProdutor'
+import Carrinho from './pages/Carrinho'
+import ProdutosComprador from './pages/ProdutosComprador'
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="/produtores" element={<Producers />} />
             <Route path="/cadastro-comprador" element={<BuyerRegister />} />
             <Route path="/home-produtor" element={<HomeProdutor />} />
+            <Route path="/carrinho" element={<Carrinho />} />
+            <Route path="/produtos-comprador" element={<ProdutosComprador />} />
           </Routes>
         </main>
         <Footer />
