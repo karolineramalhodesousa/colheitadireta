@@ -22,15 +22,29 @@ const ProdutosComprador = () => {
   const [carrinho, setCarrinho] = useState([])
 
   useEffect(() => {
-    const saved = sessionStorage.getItem('compradorData')
-    if (saved) {
+  const saved = sessionStorage.getItem('compradorData')
+
+  if (saved) {
+    try {
       setComprador(JSON.parse(saved))
-    } else {
+    } catch {
+      sessionStorage.removeItem('compradorData')
       navigate('/cadastro-comprador')
     }
-    const carrinhoSalvo = sessionStorage.getItem('carrinho')
-    if (carrinhoSalvo) setCarrinho(JSON.parse(carrinhoSalvo))
-  }, [navigate])
+  } else {
+    navigate('/cadastro-comprador')
+  }
+
+  const carrinhoSalvo = sessionStorage.getItem('carrinho')
+
+  if (carrinhoSalvo) {
+    try {
+      setCarrinho(JSON.parse(carrinhoSalvo))
+    } catch {
+      sessionStorage.removeItem('carrinho')
+    }
+  }
+}, [navigate])
 
   const adicionarAoCarrinho = (produto) => {
     const existe = carrinho.find(p => p.id === produto.id)
@@ -55,7 +69,7 @@ const ProdutosComprador = () => {
 
   if (!comprador) return null
 
-  const primeiroNome = comprador.name.split(' ')[0]
+  const primeiroNome = comprador?.name?.split(' ')[0] || 'Visitante'
 
   return (
     <div style={{ backgroundColor: '#f4f1eb', minHeight: '100vh', padding: '2rem 1rem', fontFamily: 'inherit' }}>
