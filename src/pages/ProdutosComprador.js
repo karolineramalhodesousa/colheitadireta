@@ -13,7 +13,7 @@ const produtos = [
   { id: 9, nome: 'Couve', fazenda: 'Fazenda Raízes', preco: 4.50, emoji: '🥦', unidade: 'maço' },
   { id: 10, nome: 'Mandioca', fazenda: 'Fazenda Serra Alta', preco: 5.50, emoji: '🌾', unidade: 'kg' },
   { id: 11, nome: 'Quiabo', fazenda: 'Sítio Boa Esperança', preco: 6.00, emoji: '🫑', unidade: 'kg' },
-  { id: 12, nome: 'Feijão', fazenda: 'Fazenda Cerrado', preco: 10.00, emoji: '🫘', unidade: 'kg' },
+  { id: 12, nome: 'Feijão', fazenda: 'Fazenda Cerrado', preco: 10.00, emoji: '', unidade: 'kg' },
 ]
 
 const ProdutosComprador = () => {
